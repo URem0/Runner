@@ -4,13 +4,14 @@ import javafx.scene.image.ImageView;
 public class staticThing {
     private double x;
     private double y;
-    ImageView imageView;
+    public ImageView imageView;
 
-    public staticThing(double x,double y, String fileName){
+    public staticThing(String fileName,double x,double y){
+        this.imageView=new ImageView(new Image(fileName));
         this.x=x;
         this.y=y;
-        Image image = new Image(fileName);
-        imageView = new ImageView(image);
+        this.imageView.setY(y);
+        this.imageView.setX(x);
     }
 
     public double getX() {

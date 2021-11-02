@@ -14,7 +14,7 @@ public abstract class AnimatedThing {
     public double sizey;
     public int offset;
     public String filename;
-    public ImageView sprite;
+    public ImageView imageView;
     public AnimationTimer timer;
 
 
@@ -29,16 +29,23 @@ public abstract class AnimatedThing {
         this.sizey=siezy;
         this.offset=offset;
         this.filename=filename;
-        this.sprite = new ImageView(filename);
+        this.imageView = new ImageView(filename);
+    }
+    public ImageView getImageView() {
+        return imageView;
     }
 
-    public ImageView getSprite() {
-        return sprite;
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     public void update(long time){
         a = (int) ((time % (maxa * duration)) / duration);
-        this.getSprite().setViewport(new Rectangle2D(a*(sizex+offset),0,sizex+offset,100));
+        this.getImageView().setViewport(new Rectangle2D(a*(sizex+offset),0,sizex+offset,100));
     }
 
 }

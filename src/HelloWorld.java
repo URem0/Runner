@@ -14,30 +14,21 @@ public class HelloWorld extends Application {
  public void start(Stage primaryStage) throws Exception{
              primaryStage.setTitle("Hello world");
              Group root = new Group();
-
              Pane pane = new Pane(root);
-             Camera camera = new Camera(600,400);
-             Hero hero = new Hero(20,0,0,0,100000000,6,75,100,10,"Image/heros.png");
-             GameScene theScene = new GameScene(pane, 800, 400,true,camera,hero);
+
+             GameScene theScene = new GameScene(pane, 800, 400,true);
              primaryStage.setScene(theScene);
+             pane.getChildren().add(theScene.hero.getImageView());
 
-             ImageView right =theScene.getRight().getImageView();
-             ImageView left = theScene.getLeft().getImageView();
-
-             right.setX(theScene.getRight().getX());
-
-             pane.getChildren().add(left);
-             pane.getChildren().add(right);
-             pane.getChildren().add(theScene.hero.getSprite());
              AnimationTimer timer = new AnimationTimer()
              {public void handle(long time){
                  theScene.hero.update(time);
-                 camera.update(time);
+                 theScene.camera.update(time);
                  theScene.update(time);
              }
              };
              timer.start();
-             theScene.hero.getSprite().relocate(0,250);
+             theScene.hero.getImageView().relocate(0,250);
              primaryStage.show();
          }
 
