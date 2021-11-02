@@ -5,8 +5,8 @@ import javafx.scene.Scene;
 
 public class GameScene extends Scene {
     private Camera camera;
-    public staticThing left = new staticThing(0,0,"desert.png");
-    public staticThing right= new staticThing(800,0,"desert.png");
+    public staticThing left = new staticThing(0,0,"Image/desert.png");
+    public staticThing right= new staticThing(800,0,"Image/desert.png");
     public AnimationTimer timer;
     public Hero hero;
 

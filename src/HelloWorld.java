@@ -17,7 +17,7 @@ public class HelloWorld extends Application {
 
              Pane pane = new Pane(root);
              Camera camera = new Camera(600,400);
-             Hero hero = new Hero(20,0,0,0,100000000,6,75,100,10,"heros.png");
+             Hero hero = new Hero(20,0,0,0,100000000,6,75,100,10,"Image/heros.png");
              GameScene theScene = new GameScene(pane, 800, 400,true,camera,hero);
              primaryStage.setScene(theScene);
 
