@@ -1,22 +1,13 @@
 public class Camera {
-    int x;
-    int y;
-    double vx,vy;
-    /*final double ksurm = 1;
-    final double fsurm=1.2;
-    Hero hero;
-    double dt;
-    double xh = hero.x ;
-    double yh = hero.y;
+    private int x;
+    private int y;
 
-    double ax = ksurm*(xh-x)+fsurm*vx;
-    double ay = ksurm*(yh-y)+fsurm*vy;
+    private double vx,vy;
+    private double ax,ay;
 
-    double dvx = ax*dt;
-    double dx = vx*dt;
-    double dvy = ay*dt;
-    double dy = vy*dt;*/
-
+    private final double k=1;
+    private final double m=70;
+    private final double f=10;
 
     public int getX() {
         return x;
@@ -34,12 +25,22 @@ public class Camera {
     }
 
 
+    public void update(long time,Hero hero){
+        double x_hero=hero.getX();
+        double y_hero=hero.getY();
 
+        double c1=k/m;
+        double c2=f/m;
 
+        ax=c1*(x_hero-x)-c2*vx;
+        vx+=ax;
+        x+=vx;
 
+        ay=c1*(y_hero-y)-c2*vy;
 
+        vy+=ay;
+        y+=vy;
 
-    public void update(long time){
 
     }
 }
