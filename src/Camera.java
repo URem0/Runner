@@ -6,7 +6,7 @@ public class Camera {
     private double ax,ay;
 
     private final double k=1;
-    private final double m=70;
+    private final double m=20;
     private final double f=10;
 
     public int getX() {
@@ -36,11 +36,9 @@ public class Camera {
         vx+=ax;
         x+=vx;
 
-        ay=c1*(y_hero-y)-c2*vy;
+        ay=c1*(y_hero-250-y)-c2*vy;
 
         vy+=ay;
         y+=vy;
-
-
     }
 }
