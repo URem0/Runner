@@ -5,10 +5,9 @@ import javafx.scene.image.ImageView;
 
 public abstract class AnimatedThing {
     enum Attitude{JUMPING_UP,JUMPING_DOWN,RUNNING,STILL,DEAD}
-    protected Attitude attitute;
+    public Attitude attitude;
     public double x;
     public double y;
-    public int attitude;
     public long a;
     public double duration;
     public int maxa;
@@ -20,7 +19,7 @@ public abstract class AnimatedThing {
     public AnimationTimer timer;
 
 
-    public AnimatedThing(double x,double y , int attitude,long a,double duration, int maxa,double sizex ,double siezy,int offset,String filename){
+    public AnimatedThing(double x,double y , Attitude attitude,long a,double duration, int maxa,double sizex ,double siezy,int offset,String filename){
         this.x =x;
         this.y=y;
         this.attitude=attitude;
@@ -48,21 +47,19 @@ public abstract class AnimatedThing {
     public void update(long t){
         a=(int) ((t%(maxa*duration))/duration);
 
+        if(attitude==Attitude.RUNNING){
 
-        if(attitute==Attitude.RUNNING){
+            this.imageView.setViewport(new Rectangle2D(a*(sizex+offset),0, sizex+offset,sizey));
 
-            this.imageView.setViewport(new Rectangle2D(a*(sizex+offset),0, sizex+offset,100));
-
-
-        }else if (attitute==Attitude.JUMPING_UP){
+        }else if (attitude==Attitude.JUMPING_UP){
 
             this.imageView.setViewport(new Rectangle2D(offset,160,sizex+offset,sizey));
 
-        }else if(attitute==Attitude.JUMPING_DOWN){
+        }else if(attitude==Attitude.JUMPING_DOWN){
 
             this.imageView.setViewport(new Rectangle2D(95,160,sizex+offset,sizey));
 
-        }else if(attitute==Attitude.STILL){
+        }else if(attitude==Attitude.STILL){
 
             this.imageView.setViewport(new Rectangle2D(0,0,sizex+offset,sizey));
         }

@@ -1,12 +1,12 @@
 public class Hero extends  AnimatedThing{
-    private final double g=0.7;
+    private final double g=0.4;
     private final double m=20;
     private double v_x,v_y;
     private double a_x,a_y;
     private double f_x,f_y;
     protected final int yGround=150;
 
-    public Hero(double x, double y, int attitude, int a, double duration, int maxa, double sizex, double siezy, int offset, String filename) {
+    public Hero(double x, double y, Attitude attitude, int a, double duration, int maxa, double sizex, double siezy, int offset, String filename) {
         super(x, y, attitude, a, duration, maxa, sizex, siezy, offset, filename);
     }
 
@@ -16,6 +16,7 @@ public class Hero extends  AnimatedThing{
         }
 
     }
+
     public void setForce(double f_x,double f_y){
         this.f_x=f_x;
         this.f_y=f_y;
@@ -28,24 +29,23 @@ public class Hero extends  AnimatedThing{
     @Override
     public void updateAttitude() {
         if (v_y>0){
-            attitute=Attitude.JUMPING_DOWN;
+            attitude=Attitude.JUMPING_DOWN;
         }
         else if (v_y<0){
-            attitute=Attitude.JUMPING_UP;
+            attitude=Attitude.JUMPING_UP;
         }
         else{
-            attitute=Attitude.RUNNING;
+            attitude=Attitude.RUNNING;
         }
         if (v_x==0){
-            attitute=Attitude.STILL;
+            attitude=Attitude.STILL;
         }
     }
     @Override
     public void update(long t) {
         super.update(t);
         updateAttitude();
-        a_x=f_x/m;
-        v_x+=a_x;
+        v_x=5;
         x += v_x;
 
         a_y =(g-f_y /m);

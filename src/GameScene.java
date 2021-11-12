@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+
 public class GameScene extends Scene {
     int rep = 1;
     public Camera camera ;
@@ -18,11 +20,14 @@ public class GameScene extends Scene {
     public AnimationTimer timer;
     public Hero hero;
     public Pane pane;
+    public ArrayList<Foe> enemy;
 
     public GameScene(Pane pane, double v, double v1, boolean b) {
         super(pane, v, v1, b);
-        this.hero = new Hero(100,250,0,0,100000000,6,75,100,10,"Image/heros.png");;
+        this.hero = new Hero(100,250, AnimatedThing.Attitude.STILL,0,100000000,6,75,100,10,"Image/heros.png");;
         this.camera = new Camera(100,0);
+        this.enemy = new ArrayList<Foe>(100);
+
 
         this.left=new staticThing("Image/desert.png",0,0);
         left.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
@@ -32,19 +37,17 @@ public class GameScene extends Scene {
         right.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(right.getImageView());
 
-        this.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
+        for (int i=1; i<100 ;i++){
+            Foe foe1 = new Foe(i*800,250, "Image/cactus.png");
+            enemy.add(foe1);
+            pane.getChildren().add(enemy.get(i-1).getImageView());
+        }
+        pane.getChildren().add(hero.getImageView());
+
+        this.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
-                    case D -> {
-                        hero.addForce(10);
-                        break;
-                    }
-                    case Q -> {
-
-                        hero.addForce(-10);
-                        break;
-                    }
                     case SPACE -> {
                         hero.jump();
                         break;
@@ -85,6 +88,11 @@ public class GameScene extends Scene {
 
         hero.getImageView().setX(hero.getX()-camera.getX());
         hero.getImageView().setY(hero.getY()-camera.getY());
+
+        for (int i =1; i<100;i++){
+            enemy.get(i-1).getImageView().setX(enemy.get(i-1).getX()-camera.getX());
+            enemy.get(i-1).getImageView().setY(enemy.get(i-1).getY()-camera.getY());
+        }
 
     }
 

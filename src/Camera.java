@@ -5,8 +5,8 @@ public class Camera {
     private double vx,vy;
     private double ax,ay;
 
-    private final double k=1;
-    private final double m=20;
+    private final double k=10;
+    private final double m=70;
     private final double f=10;
 
     public int getX() {
