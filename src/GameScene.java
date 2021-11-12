@@ -24,22 +24,22 @@ public class GameScene extends Scene {
 
     public GameScene(Pane pane, double v, double v1, boolean b) {
         super(pane, v, v1, b);
-        this.hero = new Hero(100,250, AnimatedThing.Attitude.STILL,0,100000000,6,75,100,10,"Image/heros.png");;
+        this.hero = new Hero(100,250, AnimatedThing.Attitude.STILL,0,100000000,6,75,100,10,"heros.png");;
         this.camera = new Camera(100,0);
         this.enemy = new ArrayList<Foe>(100);
 
 
-        this.left=new staticThing("Image/desert.png",0,0);
+        this.left=new staticThing("desert.png",0,0);
         left.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(left.getImageView());
 
-        this.right=new staticThing("Image/desert.png",desertSizeX,0);
+        this.right=new staticThing("desert.png",desertSizeX,0);
         right.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(right.getImageView());
 
 
         for (int i=1; i<100 ;i++){
-            Foe foe1 = new Foe(i*800,250, "Image/cactus.png");
+            Foe foe1 = new Foe(i*800,250, "cactus.png");
             enemy.add(foe1);
             pane.getChildren().add(enemy.get(i-1).getImageView());
         }
