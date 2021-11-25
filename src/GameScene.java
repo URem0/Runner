@@ -24,12 +24,9 @@ public class GameScene extends Scene {
     public staticThing left;
     public staticThing right;
     public staticThing over;
-    public AnimationTimer timer;
     public Hero hero;
-    public Pane pane;
     public ArrayList<staticThing> lives;
     public ArrayList<Foe> enemy;
-    //public ArrayList<Rectangle> testh;
     public int score;
     public Text dedans;
 
@@ -44,7 +41,6 @@ public class GameScene extends Scene {
         this.enemy = new ArrayList<Foe>(100);
         this.lives = new ArrayList<staticThing>(numberOfLives);
         this.score=0;
-        //this.testh = new ArrayList<Rectangle>(100);
 
         staticThing life1  = new staticThing("life.png",5,0);
         life1.getImageView().setFitWidth(55);
@@ -72,7 +68,7 @@ public class GameScene extends Scene {
         right.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(right.getImageView());
 
-        this.over = new staticThing("over.png",-500,-500);
+        this.over = new staticThing("over.png",-5000,-500);
         Rectangle text = new Rectangle(0,0,50,50);
         text.setFill(Color.TRANSPARENT);
         this.dedans = new Text();
@@ -82,14 +78,11 @@ public class GameScene extends Scene {
         stack.relocate(350,10);
 
         for (int i=1; i<100 ;i++){
-            Foe foe1 = new Foe(i*800,250, "cactus.png");
+            Foe foe1 = new Foe(i*800 ,250, "cactus.png");
             enemy.add(foe1);
-            Rectangle test = new Rectangle(i*800,250,75,100);
-            //testh.add(test);
             pane.getChildren().add(enemy.get(i-1).getImageView());
-            //pane.getChildren().add(testh.get(i-1));
-
         }
+
         pane.getChildren().add(life1.getImageView());
         pane.getChildren().add(life2.getImageView());
         pane.getChildren().add(life3.getImageView());
@@ -127,10 +120,10 @@ public class GameScene extends Scene {
             if(camera.getX()>desertSizeX*rep) {
                 rep+=1;
             }
+
             if (rep % 2 == 1) {
                 left.getImageView().setX(desertSizeX * (rep-1) - camera.getX());
                 right.getImageView().setX(desertSizeX * (rep) - camera.getX());
-
             }
             else{
                 right.getImageView().setX(desertSizeX * (rep-1) - camera.getX());
@@ -140,20 +133,13 @@ public class GameScene extends Scene {
             hero.getImageView().setX(hero.getX()-camera.getX());
             hero.getImageView().setY(hero.getY()-camera.getY());
 
-
-
             for (int i =1; i<100;i++){
                 if (hero.getX()==i*800 ){
                     score++;
-
                 }
                 enemy.get(i-1).update(time);
                 enemy.get(i-1).getImageView().setX(enemy.get(i-1).getX()-camera.getX());
                 enemy.get(i-1).getImageView().setY(enemy.get(i-1).getY()-camera.getY());
-
-
-                //testh.get(i-1).relocate(enemy.get(i-1).getHitbox().getMinX()-camera.getX(),enemy.get(i-1).getHitbox().getMinY()-camera.getY());
-
 
                     if (hero.getHitbox().intersects(enemy.get(i-1).getHitbox())){
                         if (hero.invincibility==false){

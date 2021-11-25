@@ -6,7 +6,6 @@ public class Hero extends  AnimatedThing{
     private double f_y;
     protected final int yGround=150;
     protected long timeInvincible = 500000000  ;
-    protected long count = 0;
     public boolean invincibility = false;
 
     public Hero(double x, double y, Attitude attitude, int a, double duration, int maxa, double sizex, double siezy, int offset, String filename) {
