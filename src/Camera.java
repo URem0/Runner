@@ -40,5 +40,6 @@ public class Camera {
 
         vy+=ay;
         y+=vy;
+        }
     }
-}
+

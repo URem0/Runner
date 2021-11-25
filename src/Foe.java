@@ -1,14 +1,36 @@
 import javafx.geometry.Rectangle2D;
 
 public class Foe extends AnimatedThing{
+    private double v_x,v_y;
+    private double a_x,a_y;
+    private double f_x,f_y;
 
+    protected final int yGround=150; //=150 pour le enemy =inverse hero
+    private final double g=0.2;
+    private final double m=20;
     public Foe(double x, double y, String filename) {
-        super(x, y, Attitude.STILL, 0, 0, 0, 512, 512, 0, filename);
-        getImageView().setFitHeight(100);
-        getImageView().setFitWidth(100);
+        super(x, y, Attitude.IDLE, 0, 0, 0, 75, 100, 0, filename);
+
     }
 
     @Override
     public void updateAttitude() {
+    }
+    @Override
+    public void update(long t) {
+        super.update(t);
+
+        a_y =( g - f_y / m);
+        v_y += a_y;
+        y += v_y;
+        if (y > yGround + sizey) {
+            if (v_y > 0) {
+                v_y = 0;
+            }
+            y = yGround + sizey;
+        }
+
+
+
     }
 }

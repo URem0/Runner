@@ -24,14 +24,13 @@ public class HelloWorld extends Application {
              primaryStage.setScene(theScene);
 
              AnimationTimer timer = new AnimationTimer() {
-                 public void handle(long time) {
-                     theScene.hero.update(time);
-                     theScene.enemy.get(0).update(time);
-                     theScene.camera.update(time, theScene.hero);
-                     theScene.update(time);
 
-                 }
-             };
+                     public void handle(long time) {
+                             theScene.update(time);
+                             theScene.camera.update(time, theScene.hero);}
+
+
+                 };
              timer.start();
              primaryStage.show();
          }
