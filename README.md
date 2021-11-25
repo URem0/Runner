@@ -1,3 +1,5 @@
 School Project :
+Little video game in Java (Runner)
 
-Making a little video game in Java (a runner)
+UM Rémy
+2G1 TD1 TP2
