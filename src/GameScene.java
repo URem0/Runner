@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import java.util.Random;
 
 
 import java.util.ArrayList;
@@ -117,9 +118,6 @@ public class GameScene extends Scene {
     }
 
     public void update(long time){
-        if (hero.invincibility==true){
-            System.out.println("je suis invincible");
-        }
 
         dedans.setText("Score : "+getScore());
         if (numberOfLives!=0){
@@ -145,7 +143,7 @@ public class GameScene extends Scene {
 
 
             for (int i =1; i<100;i++){
-                if (hero.getX()==i*800){
+                if (hero.getX()==i*800 ){
                     score++;
 
                 }
@@ -158,7 +156,6 @@ public class GameScene extends Scene {
 
 
                     if (hero.getHitbox().intersects(enemy.get(i-1).getHitbox())){
-                        System.out.println(time);
                         if (hero.invincibility==false){
                             hero.invincibility = true;
                             System.out.println("AIE");

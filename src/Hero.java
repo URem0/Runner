@@ -62,11 +62,9 @@ public class Hero extends  AnimatedThing{
 
         if (invincibility){
                 timeInvincible -=time;
-                System.out.println("timeinvincibilité =" + timeInvincible);
         }
         if(timeInvincible < 0){
                 invincibility = false;
-                System.out.println("je fais qqchdddddddddddddddddddddddd");
                 timeInvincible = 500000000;
 
 
