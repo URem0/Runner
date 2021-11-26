@@ -15,7 +15,7 @@ public class HelloWorld extends Application {
 
          @Override
  public void start(Stage primaryStage) throws Exception {
-             primaryStage.setTitle("Hello world");
+             primaryStage.setTitle("Runn'ENSEA");
              Group root = new Group();
              Pane pane = new Pane(root);
 

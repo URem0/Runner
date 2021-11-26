@@ -53,7 +53,7 @@ public abstract class AnimatedThing {
 
     public void update(long t){
         a=(int) ((t%(maxa*duration))/duration);
-        this.hitbox =  new Rectangle2D(this.getX()+10, this.getY(), this.sizex-10, this.sizey);
+        this.hitbox =  new Rectangle2D(this.getX(), this.getY(), this.sizex, this.sizey);
 
         if(attitude==Attitude.RUNNING){
 

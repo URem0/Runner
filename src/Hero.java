@@ -2,8 +2,8 @@ public class Hero extends  AnimatedThing{
     private final double g=0.2;
     private final double m=20;
     private double v_x,v_y;
-    private double a_y;
-    private double f_y;
+    private double a_y,a_x;
+    private double f_y,f_x;
     protected final int yGround=150;
     protected long timeInvincible = 500000000  ;
     public boolean invincibility = false;
@@ -20,6 +20,11 @@ public class Hero extends  AnimatedThing{
 
     public void setForce(double f_y){
         this.f_y=f_y;
+
+    }
+
+    public void pousse(double f_x){
+        this.f_x=f_x;
     }
 
 

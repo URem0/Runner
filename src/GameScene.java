@@ -29,6 +29,8 @@ public class GameScene extends Scene {
     public ArrayList<Foe> enemy;
     public int score;
     public Text dedans;
+    public Text restart;
+    public StackPane stack2;
 
 
 
@@ -38,7 +40,7 @@ public class GameScene extends Scene {
         super(pane, v, v1, b);
         this.hero = new Hero(0,250, AnimatedThing.Attitude.IDLE,0,100000000,6,75,100,10,"heros.png");;
         this.camera = new Camera(0,0);
-        this.enemy = new ArrayList<Foe>(100);
+        this.enemy = new ArrayList<Foe>(300);
         this.lives = new ArrayList<staticThing>(numberOfLives);
         this.score=0;
 
@@ -52,7 +54,7 @@ public class GameScene extends Scene {
         life2.getImageView().setFitWidth(55);
         life2.getImageView().setFitHeight(80);
         life2.getImageView().setViewport(new Rectangle2D(0,0,200,320));
-        lives.add(life2);
+                           lives.add(life2);
 
         staticThing life3  = new staticThing("life.png",115,0);
         life3.getImageView().setFitWidth(55);
@@ -67,8 +69,9 @@ public class GameScene extends Scene {
         this.right=new staticThing("desert.png",desertSizeX,0);
         right.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(right.getImageView());
-
         this.over = new staticThing("over.png",-5000,-500);
+
+
         Rectangle text = new Rectangle(0,0,50,50);
         text.setFill(Color.TRANSPARENT);
         this.dedans = new Text();
@@ -77,7 +80,16 @@ public class GameScene extends Scene {
         stack.getChildren().addAll(text,dedans);
         stack.relocate(350,10);
 
-        for (int i=1; i<100 ;i++){
+        Rectangle reset = new Rectangle(0,0,50,50);
+        reset.setFill(Color.TRANSPARENT);
+        this.restart = new Text();
+        restart.setFont(Font.font ("Verdana", 25));
+        restart.setFill(Color.WHITE);
+        this.stack2 = new StackPane();
+        stack2.getChildren().addAll(reset,restart);
+        stack2.relocate(-6000,300);
+
+        for (int i=1; i<300 ;i++){
             Foe foe1 = new Foe(i*800 ,250, "cactus.png");
             enemy.add(foe1);
             pane.getChildren().add(enemy.get(i-1).getImageView());
@@ -89,12 +101,23 @@ public class GameScene extends Scene {
         pane.getChildren().add(hero.getImageView());
         pane.getChildren().add(stack);
         pane.getChildren().add(over.getImageView());
+        pane.getChildren().add(stack2);
 
         this.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
                     case SPACE -> {
                         hero.jump();
+                        break;
+                    }
+                    case R -> {
+                        if (hero.attitude== AnimatedThing.Attitude.DEAD){
+                        numberOfLives = 3;
+                        life1.getImageView().setViewport(new Rectangle2D(0,0,200,320));
+                        life2.getImageView().setViewport(new Rectangle2D(0,0,200,320));
+                        life3.getImageView().setViewport(new Rectangle2D(0,0,200,320));
+                        stack2.relocate(-6000,300);
+                        score=0;}
                         break;
                     }
                 }
@@ -113,7 +136,10 @@ public class GameScene extends Scene {
     public void update(long time){
 
         dedans.setText("Score : "+getScore());
+        restart.setText("PRESS R TO RESTART");
         if (numberOfLives!=0){
+            over.getImageView().setX(-5000);
+            over.getImageView().setY(-90);
             right.getImageView().setY(-camera.getY());
             left.getImageView().setY(-camera.getY());
 
@@ -133,10 +159,12 @@ public class GameScene extends Scene {
             hero.getImageView().setX(hero.getX()-camera.getX());
             hero.getImageView().setY(hero.getY()-camera.getY());
 
-            for (int i =1; i<100;i++){
+            for (int i =1; i<300;i++){
                 if (hero.getX()==i*800 ){
                     score++;
                 }
+
+
                 enemy.get(i-1).update(time);
                 enemy.get(i-1).getImageView().setX(enemy.get(i-1).getX()-camera.getX());
                 enemy.get(i-1).getImageView().setY(enemy.get(i-1).getY()-camera.getY());
@@ -169,8 +197,9 @@ public class GameScene extends Scene {
 
     }else{
             hero.attitude = AnimatedThing.Attitude.DEAD;
-            over.getImageView().setX(130);
-            over.getImageView().setY(-90);
+            over.getImageView().setX(305);
+            over.getImageView().setY(70);
+            stack2.relocate(250,175);
             }
     }
     public int getScore(){
